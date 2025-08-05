@@ -1,12 +1,1 @@
-[
-  {
-    "nama": "Piring Gerabah Cokelat",
-    "harga": 12000,
-    "rating": 4
-  },
-  {
-    "nama": "Cobek Sambal",
-    "harga": 9000,
-    "rating": 5
-  }
-]
+[{"nama": "Piring Gerabah", "harga": 12000, "rating": 5}]
