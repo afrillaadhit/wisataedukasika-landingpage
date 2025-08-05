@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Wisata edukatif gerabah Kasongan untuk pelajar & keluarga.">
+  <meta name="keywords" content="wisata edukasi, gerabah kasongan, field trip, study tour, kerajinan tangan, Yogyakarta">
+  <title>A Trip Edukasika</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Dari Tangan Pengrajin, Menuju Hati Pecinta Seni</h1>
+    <p>Wisata edukasi gerabah Kasongan untuk pelajar & keluarga.</p>
+    <a href="#booking">Booking Sekarang</a>
+  </header>
+
+  <main>
+    <section id="katalog">
+      <h2>Katalog Produk Gerabah</h2>
+      <input type="text" placeholder="Cari produk...">
+      <div id="katalogList"></div>
+    </section>
+
+    <section id="testimoni">
+      <h2>Testimoni Pengunjung</h2>
+      <blockquote>“Anak-anak sangat senang, hasil gerabah mereka dibawa pulang!” – Ibu Rina, Guru TK</blockquote>
+      <blockquote>“Seru, edukatif, dan menyenangkan. Cocok untuk outing class.” – Pak Agus, Kepala SD</blockquote>
+    </section>
+
+    <section id="booking">
+      <h2>Form Booking Kunjungan</h2>
+      <form onsubmit="return redirectToWA(event)">
+        <input type="text" name="nama" placeholder="Nama Lengkap" required />
+        <input type="text" name="sekolah" placeholder="Asal Sekolah / Instansi" required />
+        <input type="number" name="jumlah" placeholder="Jumlah Peserta" required />
+        <input type="date" name="tanggal" required />
+        <input type="text" name="voucher" placeholder="Kode Voucher (jika ada)" />
+        <button type="submit">Kirim via WhatsApp</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 A Trip Edukasika – Kasongan, Yogyakarta</p>
+  </footer>
+
+  <script>
+  function redirectToWA(event) {
+    event.preventDefault();
+    const nama = encodeURIComponent(document.querySelector("input[name='nama']").value);
+    const sekolah = encodeURIComponent(document.querySelector("input[name='sekolah']").value);
+    const jumlah = encodeURIComponent(document.querySelector("input[name='jumlah']").value);
+    const tanggal = encodeURIComponent(document.querySelector("input[name='tanggal']").value);
+    const voucher = document.querySelector("input[name='voucher']").value.trim().toUpperCase();
+    const validVouchers = ["EDUKASIKA25", "TRIPHEMAT", "DISKONGERABAH"];
+
+    if (voucher && !validVouchers.includes(voucher)) {
+      alert("Kode voucher tidak valid.");
+      return false;
+    }
+
+    const pesan = `Halo! Saya ingin booking kunjungan:
+
+Nama: ${nama}
+Instansi: ${sekolah}
+Jumlah Peserta: ${jumlah}
+Tanggal: ${tanggal}
+Voucher: ${voucher || '-'}`;
+    const waUrl = `https://wa.me/6285155151007?text=${encodeURIComponent(pesan)}`;
+    window.open(waUrl, "_blank");
+    return false;
+  }
+
+  fetch("produk.json")
+    .then(res => res.json())
+    .then(data => {
+      const katalog = document.getElementById("katalogList");
+      katalog.innerHTML = "";
+      data.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "produk";
+        div.innerHTML = `<h3>${item.nama}</h3><p>Rp ${item.harga.toLocaleString()} • ${"★".repeat(item.rating)}${"☆".repeat(5 - item.rating)}</p>`;
+        katalog.appendChild(div);
+      });
+    });
+  </script>
+</body>
+</html>

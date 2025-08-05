@@ -1,0 +1,9 @@
+body { font-family: sans-serif; background: #fff7e6; padding: 2rem; }
+header { background: #fea62d; color: white; padding: 2rem; text-align: center; }
+a { background: white; color: #fea62d; padding: 0.5rem 1rem; text-decoration: none; border-radius: 8px; }
+section { margin: 2rem 0; }
+h2 { color: #fea62d; }
+.produk { background: #fff; padding: 1rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 8px; }
+blockquote { background: #fff3da; padding: 1rem; margin: 0.5rem 0; border-left: 5px solid #fea62d; }
+form input, form button { display: block; margin: 0.5rem 0; padding: 0.5rem; width: 100%; max-width: 400px; }
+form button { background: #fea62d; color: white; border: none; border-radius: 5px; cursor: pointer; }
